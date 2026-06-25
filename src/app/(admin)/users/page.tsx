@@ -1,10 +1,12 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { api } from '@/lib/api';
 import { Search, Ban, CheckCircle, Shield } from 'lucide-react';
 
 export default function UsersPage() {
+  const router = useRouter();
   const [users, setUsers] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
@@ -91,7 +93,7 @@ export default function UsersPage() {
             </thead>
             <tbody className="divide-y divide-gray-100">
               {users.map((user) => (
-                <tr key={user.id} className="hover:bg-gray-50">
+                <tr key={user.id} className="hover:bg-gray-50 cursor-pointer" onClick={() => router.push(`/users/${user.id}`)}>
                   <td className="px-6 py-4">
                     <div>
                       <p className="text-sm font-medium text-gray-900">{user.name || 'Sem nome'}</p>
